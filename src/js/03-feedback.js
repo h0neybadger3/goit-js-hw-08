@@ -1,4 +1,5 @@
 import throttle from 'lodash.throttle';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const STORAGE_KEY = 'feedback-form-state';
 const formData = {};
@@ -20,10 +21,13 @@ function onFormSubmit(e) {
     massage: e.currentTarget.message.value,
   };
 
+  if (!refs.form.elements.email.value || !refs.form.elements.message.value) {
+    Notify.failure('All fields must be filled');
+    return;
+  }
+
   console.log(dataSubmit);
-
   localStorage.removeItem(STORAGE_KEY);
-
   e.currentTarget.reset();
 }
 
