@@ -13,4 +13,15 @@ player.on('timeupdate', throttle(onPlay, 1000));
 
 const currentTime = localStorage.getItem(STORAGE_KEY);
 
-player.setCurrentTime(currentTime);
+player
+  .setCurrentTime(currentTime)
+  .then(function (seconds) {})
+  .catch(function (error) {
+    switch (error.name) {
+      case 'RangeError':
+        break;
+
+      default:
+        break;
+    }
+  });
